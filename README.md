@@ -1,120 +1,497 @@
-# DocuVision: Automatic Document Scanner and Quality Analyzer
+# DocuVision — Automatic Document Scanner & Quality Analyzer
 
-DocuVision is a computer vision project that detects a document inside a camera image, corrects its perspective, enhances readability, and evaluates capture quality using measurable image-processing features.
+### Computer Vision Project
 
-## Features
+**Project Area:** Classical Digital Image Processing & Document Analysis
 
-- Detects document boundaries using grayscale conversion, Gaussian blur, Canny edge detection, dilation, contour extraction, and polygon approximation.
-- Applies four-point perspective transformation to create a scanned-document view.
-- Enhances scanned output using denoising, CLAHE contrast correction, and adaptive thresholding.
-- Measures image quality through brightness, contrast, sharpness, and skew estimation.
-- Generates output images and a JSON quality report.
+---
 
-## Technologies Used
+## 👨‍🎓 Student Information
 
-- Python 3.10+
-- OpenCV
-- NumPy
-- Pillow
-- unittest
-- Mermaid diagrams for documentation
+| Field                   | Details                                                |
+| ----------------------- | ------------------------------------------------------ |
+| **Name**                | Anunay Chhapre                                         |
+| **Registration Number** | 24BAI10425                                             |
+| **Course**              | Computer Vision                                        |
+| **Project Area**        | Classical Digital Image Processing & Document Analysis |
 
-## Project Structure
+---
+
+## 📌 Project Overview
+
+**DocuVision** is a computer vision-based document scanning and quality analysis system.
+
+The project takes a photograph of a document, automatically detects the document boundary, corrects perspective distortion, enhances the scanned result, and evaluates the quality of the resulting document.
+
+The project focuses on **classical digital image processing and document analysis techniques** rather than deep-learning-based document detection.
+
+The complete project can be installed and executed from the **command line**, making it suitable for terminal-based evaluation.
+
+---
+
+## ✨ Features
+
+### 1. Automatic Document Detection
+
+The system detects the document boundary using classical computer vision techniques:
+
+* Grayscale conversion
+* Gaussian blur
+* Canny edge detection
+* Image dilation
+* Contour extraction
+* Polygon approximation
+
+### 2. Perspective Correction
+
+The detected document corners are used to perform a **four-point perspective transformation**.
+
+This converts a photographed document into a flattened, scanner-like view.
+
+### 3. Document Enhancement
+
+The scanned document is enhanced using:
+
+* Denoising
+* CLAHE-based contrast enhancement
+* Adaptive thresholding
+
+These operations improve the readability of the document.
+
+### 4. Document Quality Analysis
+
+DocuVision calculates measurable image-quality properties including:
+
+* Brightness
+* Contrast
+* Sharpness
+* Skew
+
+### 5. Automated Reports
+
+The system generates:
+
+* Processed/scanned document
+* Visual processing report
+* JSON quality report
+
+---
+
+# 🧠 Computer Vision Pipeline
 
 ```text
-src/docuvision/
-  cli.py              Command-line interface
-  config.py           Central thresholds and scanner settings
-  io_utils.py         Image read/write and resizing utilities
-  preprocessing.py    Edge detection and enhancement operations
-  scanner.py          Contour detection and perspective correction
-  quality.py          Quality metrics and feedback
-  report.py           Visual and JSON report generation
-scripts/
-  generate_sample.py  Creates a synthetic demo document photo
-tests/
-  test_docuvision.py  Unit tests for core CV logic
-docs/
-  project_report.md   Full project report content
-  diagrams/           Architecture, workflow, use case, class, sequence, ER notes
+                    Input Document Image
+                              │
+                              ▼
+                       Image Loading
+                              │
+                              ▼
+                     Grayscale Conversion
+                              │
+                              ▼
+                       Gaussian Blur
+                              │
+                              ▼
+                     Canny Edge Detection
+                              │
+                              ▼
+                           Dilation
+                              │
+                              ▼
+                     Contour Detection
+                              │
+                              ▼
+                    Polygon Approximation
+                              │
+                              ▼
+                   Document Boundary Found
+                              │
+                              ▼
+              Four-Point Perspective Transform
+                              │
+                              ▼
+                    Scanned Document
+                              │
+                              ▼
+                     Image Enhancement
+                    ┌─────────┼─────────┐
+                    │         │         │
+                    ▼         ▼         ▼
+                Denoising   CLAHE   Adaptive
+                           Contrast  Thresholding
+                    │         │         │
+                    └─────────┼─────────┘
+                              ▼
+                       Quality Analysis
+                    ┌─────────┼─────────┐
+                    │         │         │
+                    ▼         ▼         ▼
+                Brightness Contrast Sharpness
+                              │
+                              ▼
+                         Skew Analysis
+                              │
+                              ▼
+                    Output + JSON Report
 ```
 
-## Installation
+---
+
+# 🛠️ Technologies Used
+
+* **Python 3.10+**
+* **OpenCV**
+* **NumPy**
+* **Pillow**
+* **Python unittest**
+* **Mermaid** for documentation diagrams
+
+---
+
+# 📂 Project Structure
+
+```text
+Computer-Vision-24BAI10425/
+│
+├── docs/
+│   ├── project_report.md
+│   └── diagrams/
+│
+├── outputs/
+│   ├── scanned_document.png
+│   ├── visual_report.png
+│   └── quality_report.json
+│
+├── samples/
+│
+├── scripts/
+│   └── generate_sample.py
+│
+├── src/
+│   └── docuvision/
+│       ├── cli.py
+│       ├── config.py
+│       ├── io_utils.py
+│       ├── preprocessing.py
+│       ├── scanner.py
+│       ├── quality.py
+│       └── report.py
+│
+├── tests/
+│   └── test_docuvision.py
+│
+├── .gitignore
+├── main.py
+├── pyproject.toml
+├── requirements.txt
+├── PROJECT_PROFILE.md
+├── BuildYourOwnProjectVITyarthi.pdf
+└── README.md
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+The project can be completely configured from the terminal.
+
+## Step 1 — Clone the Repository
 
 ```bash
+git clone https://github.com/Anunay1601/Computer-Vision-24BAI10425.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd Computer-Vision-24BAI10425
+```
+
+---
+
+## Step 2 — Check Python Version
+
+Python **3.10 or newer** is recommended.
+
+Check your installed Python version:
+
+```bash
+python --version
+```
+
+If your system uses `python3`, run:
+
+```bash
+python3 --version
+```
+
+---
+
+## Step 3 — Create a Virtual Environment
+
+### Windows
+
+```powershell
 python -m venv .venv
-.venv\Scripts\activate
+```
+
+Activate the environment using PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Alternatively, from Command Prompt:
+
+```cmd
+.venv\Scripts\activate.bat
+```
+
+### Linux / macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+After activation, the terminal should display:
+
+```text
+(.venv)
+```
+
+---
+
+## Step 4 — Install Dependencies
+
+Upgrade pip:
+
+```bash
+python -m pip install --upgrade pip
+```
+
+Install the required Python packages:
+
+```bash
 python -m pip install -r requirements.txt
+```
+
+Install the project package in editable mode:
+
+```bash
 python -m pip install -e .
 ```
 
-## Run the Upload UI
+---
 
-Start the complete project:
+# ▶️ Running the Project
 
-```bash
-python main.py
-```
+## Command-Line Execution
 
-Open `http://127.0.0.1:8000` in a browser, upload a document image, and the UI will display the scanned document, quality metrics, and visual report.
+The project provides a command-line interface and can be executed without requiring a GUI-based development environment.
 
-## Run via Terminal (CLI Mode)
-
-Run the command-line scanner directly from your terminal:
+### Run the Demo
 
 ```bash
 python main.py --cli
 ```
 
-### CLI Options
+This runs the complete document-processing pipeline using the available sample/demo input.
 
-| Flag | Shortcut | Description |
-| --- | --- | --- |
-| `--cli` | `-c` | Enable terminal scanner interface and exit. |
-| `--input` | `-i` | Specify path to input document image (uses sample image if omitted). |
-| `--output-dir` | `-o` | Set directory for generated outputs (default: `outputs`). |
-| `--json` | | Output quality report in JSON format directly in terminal. |
-| `--run-tests` | | Run unit tests before executing. |
+---
 
-### Terminal CLI Examples
+## Process Your Own Document
 
-**Scan a custom document image:**
+To process a document image from the terminal:
+
 ```bash
 python main.py --cli --input path/to/document.jpg
 ```
 
-**Save outputs to a custom directory:**
+Example:
+
 ```bash
-python main.py -c -i path/to/document.jpg -o outputs/my_scan
+python main.py --cli --input samples/document.jpg
 ```
 
-**Get quality report formatted as JSON in terminal:**
-```bash
-python main.py --cli --json
+Common supported image formats include:
+
+* JPG
+* JPEG
+* PNG
+* BMP
+
+---
+
+# 📊 Generated Outputs
+
+After successful execution, the processed results are available in the `outputs/` directory.
+
+### Scanned Document
+
+```text
+outputs/scanned_document.png
 ```
 
-Generated output files:
+Contains the perspective-corrected and enhanced document.
 
-- `outputs/scanned_document.png` - Perspective-corrected & enhanced scan
-- `outputs/visual_report.png` - 4-panel CV pipeline visual dashboard
-- `outputs/quality_report.json` - Structured quality metrics and messages
+### Visual Report
 
+```text
+outputs/visual_report.png
+```
 
-## Testing
+Contains a visual representation of the processing and quality analysis.
+
+### Quality Report
+
+```text
+outputs/quality_report.json
+```
+
+Contains machine-readable document quality measurements.
+
+The report includes metrics such as:
+
+```text
+Brightness
+Contrast
+Sharpness
+Skew
+```
+
+The exact values depend on the input image.
+
+---
+
+# 🧪 Testing
+
+The project includes automated unit tests for the core computer vision functionality.
+
+Run all tests from the project root:
 
 ```bash
 python -m unittest discover -s tests
 ```
 
-## Screenshots / Results
+A successful test run indicates that the implemented core processing components are functioning correctly.
 
-After running the demo, open:
+---
 
-- `outputs/visual_report.png` for the complete pipeline visualization
-- `outputs/scanned_document.png` for the final enhanced scan
+# 🔬 Methodology
 
-## References
+## 1. Image Preprocessing
 
-- OpenCV documentation: image filtering, Canny edge detection, contours, perspective transform, Hough lines
-- Gonzalez and Woods, Digital Image Processing
-- Szeliski, Computer Vision: Algorithms and Applications
+The input image is prepared for further analysis through grayscale conversion and smoothing.
+
+## 2. Edge Detection
+
+Canny edge detection is used to identify significant boundaries in the image.
+
+## 3. Contour Detection
+
+Contours are extracted from the edge image to identify possible document boundaries.
+
+## 4. Polygon Approximation
+
+Detected contours are approximated as polygons to identify a possible four-corner document.
+
+## 5. Perspective Transformation
+
+The four detected document corners are used to perform a perspective transformation.
+
+This produces a top-down rectangular representation of the document.
+
+## 6. Image Enhancement
+
+The scanned document is enhanced through:
+
+* Denoising
+* CLAHE contrast enhancement
+* Adaptive thresholding
+
+## 7. Quality Analysis
+
+The processed document is evaluated using:
+
+* Brightness
+* Contrast
+* Sharpness
+* Skew estimation
+
+## 8. Report Generation
+
+The final scanned image, visual report, and quality measurements are saved to the `outputs/` directory.
+
+---
+
+# 🎯 Project Objectives
+
+The objectives of DocuVision are:
+
+* Apply classical computer vision techniques to a practical document-processing problem.
+* Automatically identify document boundaries.
+* Correct perspective distortion in photographed documents.
+* Improve document readability.
+* Measure document image quality using objective metrics.
+* Generate structured processing results.
+* Provide complete command-line execution.
+* Demonstrate practical applications of digital image processing.
+
+---
+
+# 💡 Applications
+
+The techniques implemented in DocuVision can be applied to:
+
+* Digital document scanning
+* Document digitization
+* OCR preprocessing
+* Document quality assessment
+* Mobile document-scanning applications
+* Digital archiving
+* Automated document-processing systems
+
+---
+
+# ⚠️ Limitations
+
+The performance of the system may decrease when:
+
+* The document boundary is not clearly visible.
+* The image contains heavy background clutter.
+* The document is severely blurred.
+* Lighting is extremely uneven.
+* Large portions of the document are occluded.
+* The document has an irregular or damaged boundary.
+* The input image has very low resolution.
+
+The current implementation uses classical image-processing methods and does not use a trained deep-learning document detector.
+
+---
+
+# 📚 References
+
+1. OpenCV Documentation — Image Processing, Edge Detection, Contours and Perspective Transformation.
+2. Rafael C. Gonzalez and Richard E. Woods, *Digital Image Processing*.
+3. Richard Szeliski, *Computer Vision: Algorithms and Applications*.
+
+---
+
+# 👨‍💻 Author
+
+**Anunay Chhapre**
+
+**Registration Number:** 24BAI10425
+
+**Course:** Computer Vision
+
+**Project Area:** Classical Digital Image Processing & Document Analysis
+
+---
+
+## 🎓 Academic Project
+
+This project was developed as part of the **Computer Vision** course to demonstrate the practical application of classical digital image processing and document-analysis techniques.
+
+The project is designed to be reproducible and executable through the command line after following the installation instructions provided above.
