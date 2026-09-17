@@ -1,4 +1,4 @@
-# DocuVision: Automatic Document Scanner and Quality Analyzer
+# ScanSight: Automatic Document Scanner and Quality Analyzer
 
 ## Computer Vision Project Report
 
@@ -18,13 +18,13 @@
 
 # 1. Abstract
 
-DocuVision is a computer vision-based document scanning and quality analysis system developed using classical digital image processing techniques.
+ScanSight is a computer vision-based document scanning and quality analysis system developed using classical digital image processing techniques.
 
 The system takes a photograph containing a document as input and automatically identifies the document region, corrects perspective distortion, enhances the resulting document image, and evaluates its visual quality.
 
 The project uses techniques such as grayscale conversion, Gaussian filtering, Canny edge detection, image dilation, contour detection, polygon approximation, four-point perspective transformation, denoising, CLAHE-based contrast enhancement, and adaptive thresholding.
 
-In addition to generating a scanner-like document image, DocuVision calculates quality-related measurements such as brightness, contrast, sharpness, and skew. The results are saved as processed images and a structured JSON report.
+In addition to generating a scanner-like document image, ScanSight calculates quality-related measurements such as brightness, contrast, sharpness, and skew. The results are saved as processed images and a structured JSON report.
 
 The complete system is designed to be executable from the command line, making the implementation reproducible without depending on a GUI-based development environment.
 
@@ -36,7 +36,7 @@ Digitizing physical documents using photographs is a common computer vision prob
 
 A document that is photographed at an angle does not have the same rectangular appearance as a scanned document. Therefore, simply saving the original photograph may not produce a suitable digital copy.
 
-DocuVision addresses this problem through a sequence of classical image-processing operations. The system identifies the document boundary, estimates its four corners, transforms it into a rectangular view, enhances the resulting image, and measures its quality.
+ScanSight addresses this problem through a sequence of classical image-processing operations. The system identifies the document boundary, estimates its four corners, transforms it into a rectangular view, enhances the resulting image, and measures its quality.
 
 The project demonstrates how fundamental computer vision concepts can be combined into a practical document-analysis application without requiring a deep learning model.
 
@@ -71,7 +71,7 @@ Therefore, the objective of this project is to develop an automated computer vis
 
 # 4. Objectives
 
-The main objectives of DocuVision are:
+The main objectives of ScanSight are:
 
 * To implement a practical document-scanning system using classical computer vision.
 * To detect document boundaries automatically.
@@ -108,7 +108,7 @@ The project primarily focuses on documents whose boundaries can be reasonably de
 
 # 6. Proposed Solution
 
-DocuVision uses a sequential image-processing pipeline.
+ScanSight uses a sequential image-processing pipeline.
 
 The general workflow is:
 
@@ -279,7 +279,7 @@ Flattened Document
    |______________|
 ```
 
-DocuVision uses the detected four document corners to perform a four-point perspective transformation.
+ScanSight uses the detected four document corners to perform a four-point perspective transformation.
 
 The transformation maps the quadrilateral document region into a rectangular output.
 
@@ -321,7 +321,7 @@ This can improve document readability when illumination is not uniform.
 
 # 10. Document Quality Analysis
 
-A major component of DocuVision is the analysis of the processed document.
+A major component of ScanSight is the analysis of the processed document.
 
 The project calculates several measurable properties.
 
@@ -400,7 +400,7 @@ The project is divided into multiple modules.
 The project follows a modular structure.
 
 ```text
-src/docuvision/
+src/scansight/
 │
 ├── cli.py
 ├── config.py
@@ -458,7 +458,7 @@ Computer-Vision-24BAI10425/
 │   └── generate_sample.py
 │
 ├── src/
-│   └── docuvision/
+│   └── scansight/
 │       ├── cli.py
 │       ├── config.py
 │       ├── io_utils.py
@@ -468,7 +468,7 @@ Computer-Vision-24BAI10425/
 │       └── report.py
 │
 ├── tests/
-│   └── test_docuvision.py
+│   └── test_scansight.py
 │
 ├── .gitignore
 ├── main.py
@@ -587,7 +587,7 @@ The test suite is intended to verify the functionality of the core computer visi
 
 # 17. Output
 
-After processing an image, DocuVision generates output files.
+After processing an image, ScanSight generates output files.
 
 ### 17.1 Scanned Document
 
@@ -738,7 +738,7 @@ The system could be extended to process multiple documents automatically.
 
 # 22. Applications
 
-DocuVision's techniques can be applied to:
+ScanSight's techniques can be applied to:
 
 * Digital document scanning
 * OCR preprocessing
@@ -753,7 +753,7 @@ DocuVision's techniques can be applied to:
 
 # 23. Conclusion
 
-DocuVision demonstrates the practical application of classical digital image processing techniques to the problem of document scanning and analysis.
+ScanSight demonstrates the practical application of classical digital image processing techniques to the problem of document scanning and analysis.
 
 The system combines preprocessing, edge detection, contour analysis, polygon approximation, perspective transformation, image enhancement, and quality measurement into a complete pipeline.
 

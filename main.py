@@ -1,4 +1,4 @@
-"""One-command runner for the DocuVision project."""
+"""One-command runner for the ScanSight project."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def _ensure_import_path() -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Run the DocuVision document scanner (Browser UI or Terminal CLI)."
+        description="Run the ScanSight document scanner (Browser UI or Terminal CLI)."
     )
     parser.add_argument(
         "-i",
@@ -102,7 +102,7 @@ def run_tests() -> int:
 
 
 def run_scan(input_path: Path | None, output_dir: str, print_json: bool = False) -> int:
-    from docuvision.cli import print_cli_report, run
+    from scansight.cli import print_cli_report, run
     from scripts.generate_sample import create_sample
 
     try:
@@ -138,7 +138,7 @@ def main() -> int:
         if scan_status != 0:
             return scan_status
 
-    from docuvision.web import serve
+    from scansight.web import serve
 
     serve(args.host, args.port)
     return 0

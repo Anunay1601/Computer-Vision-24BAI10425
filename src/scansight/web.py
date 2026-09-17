@@ -1,4 +1,4 @@
-"""Browser upload UI for DocuVision."""
+"""Browser upload UI for ScanSight."""
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ INDEX_HTML = """<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DocuVision AI — Intelligent Document Scanner & Quality Engine</title>
+  <title>ScanSight AI — Intelligent Document Scanner & Quality Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -938,7 +938,7 @@ INDEX_HTML = """<!doctype html>
         </div>
         <div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span class="brand-title">DocuVision</span>
+            <span class="brand-title">ScanSight</span>
             <span class="brand-tag">AI Vision v1.0</span>
           </div>
         </div>
@@ -1517,8 +1517,8 @@ def _json(handler: BaseHTTPRequestHandler, status: HTTPStatus, payload: dict[str
     handler.wfile.write(body)
 
 
-class DocuVisionHandler(BaseHTTPRequestHandler):
-    server_version = "DocuVisionHTTP/1.0"
+class ScanSightHandler(BaseHTTPRequestHandler):
+    server_version = "ScanSightHTTP/1.0"
 
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
@@ -1656,14 +1656,14 @@ class DocuVisionHandler(BaseHTTPRequestHandler):
 
 def serve(host: str = "127.0.0.1", port: int = 8000) -> None:
     OUTPUTS.mkdir(parents=True, exist_ok=True)
-    server = ThreadingHTTPServer((host, port), DocuVisionHandler)
-    print(f"DocuVision UI running at http://{host}:{port}")
+    server = ThreadingHTTPServer((host, port), ScanSightHandler)
+    print(f"ScanSight UI running at http://{host}:{port}")
     print("Press Ctrl+C to stop the server.")
     server.serve_forever()
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Start the DocuVision browser upload UI.")
+    parser = argparse.ArgumentParser(description="Start the ScanSight browser upload UI.")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", default=8000, type=int)
     return parser

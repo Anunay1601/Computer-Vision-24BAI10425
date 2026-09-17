@@ -2,7 +2,7 @@
 
 ## Project Title
 
-DocuVision: Automatic Document Scanner and Quality Analyzer
+ScanSight: Automatic Document Scanner and Quality Analyzer
 
 ## Problem Statement
 

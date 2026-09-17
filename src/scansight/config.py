@@ -1,4 +1,4 @@
-"""Central configuration for the DocuVision pipeline."""
+"""Central configuration for the ScanSight pipeline."""
 
 from dataclasses import dataclass
 

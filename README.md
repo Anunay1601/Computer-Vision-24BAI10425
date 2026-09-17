@@ -1,4 +1,4 @@
-# DocuVision — Automatic Document Scanner & Quality Analyzer
+# ScanSight — Automatic Document Scanner & Quality Analyzer
 
 ### Computer Vision Project
 
@@ -19,7 +19,7 @@
 
 ## 📌 Project Overview
 
-**DocuVision** is a computer vision-based document scanning and quality analysis system.
+**ScanSight** is a computer vision-based document scanning and quality analysis system.
 
 The project takes a photograph of a document, automatically detects the document boundary, corrects perspective distortion, enhances the scanned result, and evaluates the quality of the resulting document.
 
@@ -60,7 +60,7 @@ These operations improve the readability of the document.
 
 ### 4. Document Quality Analysis
 
-DocuVision calculates measurable image-quality properties including:
+ScanSight calculates measurable image-quality properties including:
 
 * Brightness
 * Contrast
@@ -168,7 +168,7 @@ Computer-Vision-24BAI10425/
 │   └── generate_sample.py
 │
 ├── src/
-│   └── docuvision/
+│   └── scansight/
 │       ├── cli.py
 │       ├── config.py
 │       ├── io_utils.py
@@ -178,7 +178,7 @@ Computer-Vision-24BAI10425/
 │       └── report.py
 │
 ├── tests/
-│   └── test_docuvision.py
+│   └── test_scansight.py
 │
 ├── .gitignore
 ├── main.py
@@ -427,7 +427,7 @@ The final scanned image, visual report, and quality measurements are saved to th
 
 # 🎯 Project Objectives
 
-The objectives of DocuVision are:
+The objectives of ScanSight are:
 
 * Apply classical computer vision techniques to a practical document-processing problem.
 * Automatically identify document boundaries.
@@ -442,7 +442,7 @@ The objectives of DocuVision are:
 
 # 💡 Applications
 
-The techniques implemented in DocuVision can be applied to:
+The techniques implemented in ScanSight can be applied to:
 
 * Digital document scanning
 * Document digitization

@@ -12,7 +12,7 @@ def create_sample(output_path: str = "samples/sample_document.jpg") -> Path:
     canvas = np.clip(canvas.astype(np.int16) + noise, 0, 255).astype(np.uint8)
 
     document = np.full((620, 440, 3), 245, dtype=np.uint8)
-    cv2.putText(document, "DocuVision", (50, 80), cv2.FONT_HERSHEY_SIMPLEX, 1.45, (20, 20, 20), 3)
+    cv2.putText(document, "ScanSight", (50, 80), cv2.FONT_HERSHEY_SIMPLEX, 1.45, (20, 20, 20), 3)
     cv2.putText(document, "Computer Vision Project", (50, 130), cv2.FONT_HERSHEY_SIMPLEX, 0.72, (60, 60, 60), 2)
 
     y = 205

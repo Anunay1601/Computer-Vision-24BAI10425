@@ -3,11 +3,11 @@ import unittest
 import cv2
 import numpy as np
 
-from docuvision.quality import analyze_quality
-from docuvision.scanner import find_document_contour, four_point_transform, order_points, scan_document
+from scansight.quality import analyze_quality
+from scansight.scanner import find_document_contour, four_point_transform, order_points, scan_document
 
 
-class DocuVisionTests(unittest.TestCase):
+class ScanSightTests(unittest.TestCase):
     def test_order_points_returns_expected_corners(self):
         points = np.array([[[100, 100]], [[20, 20]], [[110, 20]], [[30, 110]]], dtype=np.float32)
         ordered = order_points(points)
@@ -32,7 +32,7 @@ class DocuVisionTests(unittest.TestCase):
         edges = np.zeros((300, 300), dtype=np.uint8)
         cv2.rectangle(edges, (45, 50), (250, 260), 255, 3)
 
-        contour, fallback = find_document_contour(edges, config=__import__("docuvision.config").config.ScannerConfig())
+        contour, fallback = find_document_contour(edges, config=__import__("scansight.config").config.ScannerConfig())
 
         self.assertFalse(fallback)
         self.assertEqual(len(contour), 4)
@@ -58,13 +58,13 @@ class DocuVisionTests(unittest.TestCase):
 
 
     def test_web_handler_imports_and_serves_html(self):
-        from docuvision.web import DocuVisionHandler, INDEX_HTML
-        self.assertIn("DocuVision", INDEX_HTML)
-        self.assertEqual(DocuVisionHandler.server_version, "DocuVisionHTTP/1.0")
+        from scansight.web import ScanSightHandler, INDEX_HTML
+        self.assertIn("ScanSight", INDEX_HTML)
+        self.assertEqual(ScanSightHandler.server_version, "ScanSightHTTP/1.0")
 
     def test_cli_run_executes_successfully(self):
         from pathlib import Path
-        from docuvision.cli import run
+        from scansight.cli import run
         from scripts.generate_sample import create_sample
 
         sample_path = Path(__file__).resolve().parents[1] / "samples" / "sample_document.jpg"

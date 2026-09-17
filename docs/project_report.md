@@ -1,8 +1,8 @@
-# DocuVision: Automatic Document Scanner and Quality Analyzer
+# ScanSight: Automatic Document Scanner and Quality Analyzer
 
 ## 1. Cover Page
 
-**Project Title:** DocuVision: Automatic Document Scanner and Quality Analyzer  
+**Project Title:** ScanSight: Automatic Document Scanner and Quality Analyzer  
 **Course Area:** Computer Vision  
 **Project Type:** Image processing and document analysis  
 **Submitted By:** Student Name / Registration Number  
@@ -10,7 +10,7 @@
 
 ## 2. Introduction
 
-Document images captured using mobile phones often suffer from perspective distortion, poor lighting, blur, and unnecessary background regions. These problems reduce readability and make digital submission less reliable. DocuVision is a computer vision project that converts a normal camera image of a document into a clean scanned output and reports whether the image quality is acceptable.
+Document images captured using mobile phones often suffer from perspective distortion, poor lighting, blur, and unnecessary background regions. These problems reduce readability and make digital submission less reliable. ScanSight is a computer vision project that converts a normal camera image of a document into a clean scanned output and reports whether the image quality is acceptable.
 
 The project applies classical computer vision concepts including grayscale conversion, filtering, edge detection, contour detection, polygon approximation, perspective transformation, adaptive thresholding, and quality feature extraction.
 
@@ -103,12 +103,12 @@ The project is implemented in Python using OpenCV and NumPy.
 
 Main source files:
 
-- `src/docuvision/io_utils.py`: reads, writes, and resizes images.
-- `src/docuvision/preprocessing.py`: performs grayscale conversion, Gaussian blur, Canny edge detection, dilation, denoising, CLAHE, and adaptive thresholding.
-- `src/docuvision/scanner.py`: detects contours, orders document corners, applies perspective correction, and returns scan results.
-- `src/docuvision/quality.py`: computes brightness, contrast, sharpness, skew, and quality messages.
-- `src/docuvision/report.py`: creates the visual pipeline report and JSON report.
-- `src/docuvision/cli.py`: provides the command-line interface.
+- `src/scansight/io_utils.py`: reads, writes, and resizes images.
+- `src/scansight/preprocessing.py`: performs grayscale conversion, Gaussian blur, Canny edge detection, dilation, denoising, CLAHE, and adaptive thresholding.
+- `src/scansight/scanner.py`: detects contours, orders document corners, applies perspective correction, and returns scan results.
+- `src/scansight/quality.py`: computes brightness, contrast, sharpness, skew, and quality messages.
+- `src/scansight/report.py`: creates the visual pipeline report and JSON report.
+- `src/scansight/cli.py`: provides the command-line interface.
 
 Processing pipeline:
 
@@ -135,7 +135,7 @@ python scripts/generate_sample.py
 The project can then be executed using:
 
 ```bash
-python -m docuvision.cli --input samples/sample_document.jpg --output-dir outputs
+python -m scansight.cli --input samples/sample_document.jpg --output-dir outputs
 ```
 
 Expected outputs:

@@ -1,4 +1,4 @@
-"""Command-line interface for DocuVision."""
+"""Command-line interface for ScanSight."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from .scanner import scan_document
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="DocuVision: Automatic Document Scanner and Quality Analyzer CLI"
+        description="ScanSight: Automatic Document Scanner and Quality Analyzer CLI"
     )
     parser.add_argument(
         "-i",
@@ -73,7 +73,7 @@ def print_cli_report(
     quality_file = outputs["quality_report"]
 
     print("=" * 64)
-    print("       DocuVision: Automatic Document Scanner & Quality Engine      ")
+    print("       ScanSight: Automatic Document Scanner & Quality Engine      ")
     print("=" * 64)
     print(f" Input Image      : {input_path}")
     print(f" Output Directory : {Path(scanned).parent.resolve()}")
