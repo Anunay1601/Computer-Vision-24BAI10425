@@ -18,40 +18,60 @@ def _ensure_import_path() -> None:
     if src_path not in sys.path:
         sys.path.insert(0, src_path)
 
+    # Auto-detect local virtualenv site-packages if available
+    venv_dir = ROOT / ".venv"
+    if venv_dir.exists():
+        win_site = venv_dir / "Lib" / "site-packages"
+        if win_site.exists() and str(win_site) not in sys.path:
+            sys.path.insert(0, str(win_site))
+        lib_dir = venv_dir / "lib"
+        if lib_dir.exists():
+            for p in lib_dir.glob("python*/site-packages"):
+                if str(p) not in sys.path:
+                    sys.path.insert(0, str(p))
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Run the complete DocuVision document scanner project."
+        description="Run the DocuVision document scanner (Browser UI or Terminal CLI)."
     )
     parser.add_argument(
+        "-i",
         "--input",
-        help="Optional image path to process once before starting the UI, or to process in --cli mode.",
+        help="Path to an input document image.",
     )
     parser.add_argument(
+        "-o",
         "--output-dir",
         default="outputs",
-        help="Directory where output files will be saved.",
+        help="Directory where output files will be saved (default: outputs).",
+    )
+    parser.add_argument(
+        "-c",
+        "--cli",
+        action="store_true",
+        help="Run the terminal scanner interface and exit instead of starting the browser UI.",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output quality analysis report in JSON format in CLI mode.",
     )
     parser.add_argument(
         "--run-tests",
         action="store_true",
-        help="Run unit tests before starting the UI.",
-    )
-    parser.add_argument(
-        "--cli",
-        action="store_true",
-        help="Run the command-line scanner and exit instead of starting the browser UI.",
+        help="Run unit tests before starting.",
     )
     parser.add_argument(
         "--host",
         default="127.0.0.1",
-        help="Host for the browser upload UI.",
+        help="Host for the browser upload UI (default: 127.0.0.1).",
     )
     parser.add_argument(
         "--port",
         default=8000,
         type=int,
-        help="Port for the browser upload UI.",
+        help="Port for the browser upload UI (default: 8000).",
     )
     return parser
 
@@ -61,8 +81,18 @@ def run_tests() -> int:
     env = os.environ.copy()
     existing_path = env.get("PYTHONPATH")
     env["PYTHONPATH"] = str(SRC) if not existing_path else f"{SRC}{os.pathsep}{existing_path}"
+
+    venv_python_win = ROOT / ".venv" / "Scripts" / "python.exe"
+    venv_python_posix = ROOT / ".venv" / "bin" / "python"
+    if venv_python_win.exists():
+        python_bin = str(venv_python_win)
+    elif venv_python_posix.exists():
+        python_bin = str(venv_python_posix)
+    else:
+        python_bin = sys.executable
+
     completed = subprocess.run(
-        [sys.executable, "-m", "unittest", "discover", "-s", "tests"],
+        [python_bin, "-m", "unittest", "discover", "-s", "tests"],
         cwd=ROOT,
         env=env,
         check=False,
@@ -70,21 +100,23 @@ def run_tests() -> int:
     return completed.returncode
 
 
-def run_scan(input_path: Path | None, output_dir: str) -> None:
-    from docuvision.cli import run
+
+def run_scan(input_path: Path | None, output_dir: str, print_json: bool = False) -> int:
+    from docuvision.cli import print_cli_report, run
     from scripts.generate_sample import create_sample
 
-    selected_input = input_path if input_path else create_sample(ROOT / "samples" / "sample_document.jpg")
-
-    print("DocuVision: Automatic Document Scanner and Quality Analyzer")
-    print(f"Input image: {selected_input}")
-    print(f"Output directory: {output_dir}\n")
-
-    outputs = run(str(selected_input), output_dir)
-
-    print("Generated outputs:")
-    for name, path in outputs.items():
-        print(f"- {name}: {path}")
+    try:
+        selected_input = input_path if input_path else create_sample(ROOT / "samples" / "sample_document.jpg")
+        outputs = run(selected_input, output_dir)
+        quality = outputs["quality"]
+        print_cli_report(selected_input, outputs, quality, print_json=print_json)  # type: ignore[arg-type]
+        return 0
+    except FileNotFoundError as e:
+        print(f"\nError: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"\nError processing document scan: {e}", file=sys.stderr)
+        return 1
 
 
 def main() -> int:
@@ -99,11 +131,12 @@ def main() -> int:
             return test_status
 
     if args.cli:
-        run_scan(input_path, args.output_dir)
-        return 0
+        return run_scan(input_path, args.output_dir, print_json=args.json)
 
     if input_path:
-        run_scan(input_path, args.output_dir)
+        scan_status = run_scan(input_path, args.output_dir, print_json=args.json)
+        if scan_status != 0:
+            return scan_status
 
     from docuvision.web import serve
 
@@ -113,3 +146,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

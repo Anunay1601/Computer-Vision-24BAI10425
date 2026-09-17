@@ -62,8 +62,33 @@ class DocuVisionTests(unittest.TestCase):
         self.assertIn("DocuVision", INDEX_HTML)
         self.assertEqual(DocuVisionHandler.server_version, "DocuVisionHTTP/1.0")
 
+    def test_cli_run_executes_successfully(self):
+        from pathlib import Path
+        from docuvision.cli import run
+        from scripts.generate_sample import create_sample
+
+        sample_path = Path(__file__).resolve().parents[1] / "samples" / "sample_document.jpg"
+        if not sample_path.exists():
+            create_sample(sample_path)
+
+        outputs = run(sample_path, output_dir="outputs/test_cli_out")
+        self.assertIn("scanned_document", outputs)
+        self.assertIn("visual_report", outputs)
+        self.assertIn("quality_report", outputs)
+        self.assertIn("quality", outputs)
+        self.assertTrue(Path(outputs["scanned_document"]).exists())
+
+    def test_main_cli_argument_parsing(self):
+        from main import build_parser
+        parser = build_parser()
+        args = parser.parse_args(["--cli", "--input", "test_doc.jpg", "--output-dir", "custom_out"])
+        self.assertTrue(args.cli)
+        self.assertEqual(args.input, "test_doc.jpg")
+        self.assertEqual(args.output_dir, "custom_out")
+
 
 if __name__ == "__main__":
     unittest.main()
+
 
 

@@ -58,23 +58,47 @@ python main.py
 
 Open `http://127.0.0.1:8000` in a browser, upload a document image, and the UI will display the scanned document, quality metrics, and visual report.
 
-## Run the Command-Line Demo
+## Run via Terminal (CLI Mode)
+
+Run the command-line scanner directly from your terminal:
 
 ```bash
 python main.py --cli
 ```
 
-To process your own image from the terminal:
+### CLI Options
 
+| Flag | Shortcut | Description |
+| --- | --- | --- |
+| `--cli` | `-c` | Enable terminal scanner interface and exit. |
+| `--input` | `-i` | Specify path to input document image (uses sample image if omitted). |
+| `--output-dir` | `-o` | Set directory for generated outputs (default: `outputs`). |
+| `--json` | | Output quality report in JSON format directly in terminal. |
+| `--run-tests` | | Run unit tests before executing. |
+
+### Terminal CLI Examples
+
+**Scan a custom document image:**
 ```bash
 python main.py --cli --input path/to/document.jpg
 ```
 
-Generated files:
+**Save outputs to a custom directory:**
+```bash
+python main.py -c -i path/to/document.jpg -o outputs/my_scan
+```
 
-- `outputs/scanned_document.png`
-- `outputs/visual_report.png`
-- `outputs/quality_report.json`
+**Get quality report formatted as JSON in terminal:**
+```bash
+python main.py --cli --json
+```
+
+Generated output files:
+
+- `outputs/scanned_document.png` - Perspective-corrected & enhanced scan
+- `outputs/visual_report.png` - 4-panel CV pipeline visual dashboard
+- `outputs/quality_report.json` - Structured quality metrics and messages
+
 
 ## Testing
 
